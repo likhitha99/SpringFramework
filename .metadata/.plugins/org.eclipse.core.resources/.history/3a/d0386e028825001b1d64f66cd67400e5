@@ -1,0 +1,5 @@
+package com.sunsoft.common.model;
+
+public class Employee {
+
+}

@@ -1,0 +1,101 @@
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
+public class Client {
+
+private static SessionFactory factory;
+	
+	public static void getSessionFactory()
+	{
+		try {
+			Configuration conf=new Configuration().configure();
+			StandardServiceRegistryBuilder builder=new StandardServiceRegistryBuilder().applySettings(conf.getProperties());
+			factory=conf.buildSessionFactory(builder.build());
+		}
+		catch(Throwable ex) {
+			System.err.println("Falied to create sessionFactory object."+ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+	
+	public static void main(String[] args) throws InterruptedException{
+		try
+		{
+			getSessionFactory();
+			Client client_1=new Client();
+		/*	client_1.InsertRecordInDatabase(8, 568, "HDFC", 4,50000);
+			client_1.InsertRecordInDatabase(2, 456, "HDFC", 4,50000);		
+			client_1.InsertRecordInDatabase(5, 476, "LIC", 4,60000);*/
+	
+			System.out.println("Listing Insurance Details");
+			client_1.DisplayRecords();
+
+			//Deleting
+		//	System.out.println("Deleting record with id 2");
+		//	client_1.DeleteRecord(2);
+		//	client_1.DisplayRecords();
+	
+			
+		}
+		catch(HibernateException e)
+		{
+			System.out.println("Exception is: "+e);
+		}
+	}
+	
+	public void InsertRecordInDatabase(int id,int policyno, String name, int tenure,int amount) throws HibernateException
+	{
+		Session session=factory.openSession();
+		Transaction tx=session.beginTransaction();
+		
+		Insurance i=new Insurance(id,policyno,name,tenure,amount);
+		session.save(i);
+		tx.commit();
+		
+		session.close();
+	}
+	
+	public void DisplayRecords() throws HibernateException{
+		Session session=factory.openSession();
+		List ls=session.createQuery("FROM Insurance").list();
+		for(Iterator iterator=ls.iterator(); iterator.hasNext();) {
+			Insurance i=(Insurance) iterator.next();
+			System.out.print("Policy Number: "+i.getPolicyNumber());
+			System.out.print("\t Policy Name: "+i.getName());
+			System.out.println("\t Tenure : "+i.getTenure());
+			System.out.println("\t Amount : "+i.getAmount());	
+		}
+		session.close();
+	}
+	
+	public void UpdateRecord(Integer id, int amount) throws HibernateException
+	{
+		Session session=factory.openSession();
+		Transaction tx=session.beginTransaction();
+		
+		Insurance ins=(Insurance)session.get(Insurance.class, id);
+		ins.setAmount(amount);
+		session.saveOrUpdate(ins);
+		tx.commit();
+		session.close();
+	}
+	
+	public void DeleteRecord(Integer id) throws HibernateException
+	{
+		Session session=factory.openSession();
+		Transaction tx=session.beginTransaction();
+		Insurance ins=(Insurance)session.get(Insurance.class, id);
+		session.delete(ins);
+		tx.commit();
+		session.close();
+	}
+	
+	
+}

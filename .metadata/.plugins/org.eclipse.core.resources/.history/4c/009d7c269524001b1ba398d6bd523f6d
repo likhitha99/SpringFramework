@@ -1,0 +1,22 @@
+package com.sunsoft;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+public class Insurance {
+	@RequestMapping("/submit")
+	public String details(HttpServletRequest request,HttpServletResponse res,Model m) {
+		String name=request.getParameter("name");
+		String type=request.getParameter("type");
+		
+		String data="Policy Name:"+name+" Policy Type :"+type;
+		ArrayList<String> list=new ArrayList<>();
+		return "";
+		
+	}
+}

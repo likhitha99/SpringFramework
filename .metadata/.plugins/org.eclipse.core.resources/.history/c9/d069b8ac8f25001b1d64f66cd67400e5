@@ -1,0 +1,9 @@
+<h1>Payroll Details: </h1>
+
+<form action="payroll" method="get">
+Employee ID:<input type="number" name=""/><br/><br/>
+
+<input type="submit" value="Fetch"/>
+</form>
+
+parameter pole

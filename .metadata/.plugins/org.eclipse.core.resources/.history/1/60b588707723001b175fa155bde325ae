@@ -1,0 +1,6 @@
+<table>
+<tr>${id}</tr>
+<tr>${name}</tr>
+<tr>${dept}</tr>
+<tr>${desn}</tr>
+</table>

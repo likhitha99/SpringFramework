@@ -1,0 +1,11 @@
+<html>
+<head></head>
+<body>
+<table>
+<tr>${id}</tr>
+<tr>${name}</tr>
+<tr>${dept}</tr>
+<tr>${desn}</tr>
+</table>
+</body>
+</html>

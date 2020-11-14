@@ -1,0 +1,13 @@
+INDEX VERSION 1.4+C:\Users\chlik\Desktop\Laptop\DBS\Projects\Backend\Spring\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+790241925.index
+3416703006.index
+3603125445.index
+3989989259.index
+3886351465.index
+2815766352.index
+1253658664.index
+2335184588.index
+2181825422.index
+3654390819.index
+1274818638.index
+4258530338.index

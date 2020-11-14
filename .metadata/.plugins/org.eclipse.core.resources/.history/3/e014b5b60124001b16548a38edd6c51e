@@ -1,0 +1,8 @@
+package snippet;
+
+public class Snippet {
+	public static void main(String[] args) {
+		client_1.InsertRecordInDatabase(2,"Amy","N",5000);
+	}
+}
+
